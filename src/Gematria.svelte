@@ -1,6 +1,3 @@
-<!--
--->
-
 <script>
   export let table;
   export let u;
@@ -12,7 +9,11 @@
 
   let examples = [
     { str: "Ἰησοῦς", val: 888 },
-    { str: "Χριστός", val: 1460 }
+    { str: "Χριστός", val: 1460 },
+    { str: "Jesus", val: 515 },
+    { str: "IHSOYS", val: 977 },
+    { str: "asdf", val: 111 },
+    { str: "Louisa", val: 500 },
   ];
 
   let input = "";
@@ -84,6 +85,18 @@
     <br />
     <div on:click={() => loadExample(examples[0].str)}>{examples[0].str}</div>
     <div on:click={() => loadExample(examples[1].str)}>{examples[1].str}</div>
+    <div on:click={() => loadExample(examples[2].str)}>{examples[2].str}</div>
+    <div on:click={() => loadExample(examples[3].str)}>{examples[3].str}</div>
+    <div on:click={() => loadExample(examples[4].str)}>{examples[4].str}</div>
+    <div on:click={() => loadExample(examples[5].str)}>{examples[5].str}</div>
+    <br />
+    <div>
+      <a href="https://en.wikipedia.org/wiki/Gematria" target="_blank">Gematria</a>
+    </div>
+    <div>
+      <a href="https://en.wikipedia.org/wiki/Isopsephy" target="_blank">Isopsephy</a>
+    </div>
+    
     <!--
     {@html examples.map(x => {
       return `<div on:click={loadExample(${x.str})}>${x.str}</div>`
