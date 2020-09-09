@@ -19,9 +19,24 @@
   let chars = [];
 
   let uppercase = false;
+  let verbose = false;
 
   function toggleCase() {
     uppercase = !uppercase;
+  }
+
+  function toggleVerbose() {
+    verbose = !verbose;
+  }
+
+  function loadExample(str) {
+    input = str;
+    handleInput();
+  }
+
+  function clearInput() {
+    input = "";
+    handleInput();
   }
 
   function handleInput() {
@@ -63,6 +78,19 @@
 </script>
 
 <main>
+  <nav>
+    <div on:click={() => clearInput()}>clear</div>
+    <div on:click={toggleVerbose} class={verbose ? 'on' : 'off'}>verbose</div>
+    <br />
+    <div on:click={() => loadExample(examples[0].str)}>{examples[0].str}</div>
+    <div on:click={() => loadExample(examples[1].str)}>{examples[1].str}</div>
+    <!--
+    {@html examples.map(x => {
+      return `<div on:click={loadExample(${x.str})}>${x.str}</div>`
+    }).join("")}
+    -->
+  </nav>
+
   <input bind:value={input} on:input={handleInput} placeholder={examples[0].str}>
 
   <div class="value">
@@ -82,7 +110,7 @@
       }).join(`<div class="item">+</div>`)}
   </div>
 
-  {#if chars.length}
+  {#if verbose && chars.length}
   <table>
     <thead>
       <tr>
@@ -132,7 +160,28 @@
   main > input,
   main > div,
   main > table {
-    margin-top: 40px;
+    margin-top: 50px;
+  }
+
+  nav {
+    position: fixed;
+    right: 50px;
+    color: #dca;
+    font-size: 0.8em;
+    user-select: none;
+  }
+
+  nav > div:active {
+    color: #dac;
+
+  }
+
+  .on {
+    color: #777;
+  }
+
+  .off {
+    color: #dca;
   }
 
   input {
@@ -144,6 +193,10 @@
 
   ::placeholder {
     color: #abc;
+  }
+
+  input:focus::placeholder {
+    color: transparent;
   }
 
   *:focus {
@@ -160,7 +213,7 @@
   table {
     border-collapse:collapse;
     font-family: monospace;
-    max-width: 640px;
+    min-width: 640px;
     margin: auto;
     /*
     border-spacing: 16px 0;
