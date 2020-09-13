@@ -1,5 +1,6 @@
 import svelte from "rollup-plugin-svelte";
 import json from "@rollup/plugin-json";
+import autoPreprocess from "svelte-preprocess";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
@@ -50,6 +51,7 @@ export default {
       css: (css) => {
         css.write("bundle.css");
       },
+      preprocess: autoPreprocess(),
     }),
 
     // If you have external dependencies installed from
